@@ -33,7 +33,7 @@ $(function() {
             allFeeds.forEach(function(feed){
                 expect(feed.url).toBeDefined();
                 expect(feed.url.length).toBeGreaterThan(0);
-                           });
+            });
         });
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
@@ -43,7 +43,7 @@ $(function() {
             allFeeds.forEach(function(feed){
               expect(feed.name).toBeDefined();
               expect(feed.name.length).toBeGreaterThan(0);
-              });
+            });
         });
     });
 
@@ -55,7 +55,7 @@ $(function() {
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
-        it('is hidden', function(){
+        it('is hidden by default', function(){
             expect($('body').hasClass('menu-hidden')).toBe(true);
         });
          /* TODO: Write a test that ensures the menu changes
@@ -63,14 +63,14 @@ $(function() {
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
-        it('changes visibility on click', function(){
-            menuIcon = $('.menu-icon-link');
+        it('changes its visibility when the menu icon is clicked', function(){
+            var menuIcon = $('.menu-icon-link');
 
             menuIcon.click();//HTML DOM click() method simulates a mouse-click on an element. Source: https://www.w3schools.com/jsref/met_html_click.asp
             expect($('body').hasClass('menu-hidden')).toBe(false);//first click shows menu
            
             menuIcon.click();
-            expect($('body').hasClass('menu-hidden')).toBe(true);//second click hides menu     
+            expect($('body').hasClass('menu-hidden')).toBe(true);//second click hides menu 
         });
     });
 
@@ -96,9 +96,9 @@ $(function() {
 
     /* TODO: Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', function(){
-        var container = $('.feed');
-        var containerFirst;
-        var containerSecond;
+        var container = $('.feed'),
+            containerFirst,
+            containerSecond;
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
@@ -106,14 +106,13 @@ $(function() {
         beforeEach(function(done){
             loadFeed(0, function(){
             containerFirst = container.html();
-            done();
-            });
-
-            loadFeed(1, function(){
-            containerSecond = container.html();
-            done();
+                loadFeed(1, function(){
+                containerSecond = container.html();
+                    done();
+                });
             });
         });
+    
         it('changes the content when a new feed is loaded', function(){
             expect(containerFirst).not.toEqual(containerSecond);
         });
